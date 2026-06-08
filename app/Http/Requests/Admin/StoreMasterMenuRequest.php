@@ -8,7 +8,7 @@ class StoreMasterMenuRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return auth()->check() && auth()->user()->hasRole('System Admin');
+        return auth()->check() && auth()->user()->hasRole('system-admin');
     }
 
     public function rules(): array
