@@ -279,7 +279,7 @@
                     ยกเลิก
                 </a>
                 <button type="submit"
-                        class="px-6 py-2.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition text-sm font-medium shadow-sm">
+                        class="px-6 py-2.5 bg-nature-600 text-white rounded-lg hover:bg-nature-700 transition text-sm font-medium shadow-sm">
                     <i class="fa-solid fa-floppy-disk mr-2"></i>บันทึกการแก้ไข
                 </button>
             </div>

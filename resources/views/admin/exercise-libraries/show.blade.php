@@ -12,7 +12,7 @@
                 <p class="text-sm text-gray-500 mt-1">รายละเอียดท่าบริหารในคลังวัสดุ</p>
             </div>
             <a href="{{ route('admin.exercise-libraries.edit', $exerciseLibrary) }}"
-               class="inline-flex items-center px-4 py-2.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition shadow-sm text-sm font-medium">
+               class="inline-flex items-center px-4 py-2.5 bg-nature-600 text-white rounded-lg hover:bg-nature-700 transition shadow-sm text-sm font-medium">
                 <i class="fa-solid fa-pen-to-square mr-2"></i>แก้ไข
             </a>
         </div>
