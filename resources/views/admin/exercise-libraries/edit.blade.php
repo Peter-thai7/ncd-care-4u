@@ -38,24 +38,24 @@
                     <!-- Basic Info Card -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                            <i class="fa-solid fa-info-circle text-blue-500 mr-2"></i>ข้อมูลพื้นฐาน
+                            <i class="fa-solid fa-info-circle text-nature-500 mr-2"></i>ข้อมูลพื้นฐาน
                         </h3>
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">ชื่อท่าบริหาร <span class="text-red-500">*</span></label>
                                 <input type="text" name="name" value="{{ old('name', $exerciseLibrary->name) }}"
-                                       class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" required>
+                                       class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300" required>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">รายละเอียด</label>
                                 <textarea name="description" rows="3"
-                                          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">{{ old('description', $exerciseLibrary->description) }}</textarea>
+                                          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300">{{ old('description', $exerciseLibrary->description) }}</textarea>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">หมวดหมู่ <span class="text-red-500">*</span></label>
                                     <select name="category" required
-                                            class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 bg-white">
+                                            class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300 bg-white">
                                         <option value="">-- เลือกหมวดหมู่ --</option>
                                         @foreach($categories as $key => $label)
                                             <option value="{{ $key }}" {{ old('category', $exerciseLibrary->category) === $key ? 'selected' : '' }}>{{ $label }}</option>
@@ -65,7 +65,7 @@
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-1">ระดับความยาก</label>
                                     <select name="difficulty_level"
-                                            class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 bg-white">
+                                            class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300 bg-white">
                                         <option value="">-- เลือก --</option>
                                         @foreach($difficulties as $key => $label)
                                             <option value="{{ $key }}" {{ old('difficulty_level', $exerciseLibrary->difficulty_level) === $key ? 'selected' : '' }}>{{ $label }}</option>
@@ -76,14 +76,14 @@
                                     <label class="block text-sm font-medium text-gray-700 mb-1">ระยะเวลา (นาที)</label>
                                     <input type="number" name="duration_minutes" value="{{ old('duration_minutes', $exerciseLibrary->duration_minutes) }}"
                                            min="1" max="999"
-                                           class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                                           class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300">
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">แคลอรี่ที่เผาผลาญ (kcal)</label>
                                 <input type="number" name="calories_burned" value="{{ old('calories_burned', $exerciseLibrary->calories_burned) }}"
                                        step="0.01" min="0"
-                                       class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                                       class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300">
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">วิธีทำท่าบริหาร</label>
                                 <textarea name="instructions" rows="5"
-                                          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">{{ old('instructions', $exerciseLibrary->instructions) }}</textarea>
+                                          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300">{{ old('instructions', $exerciseLibrary->instructions) }}</textarea>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
@@ -136,7 +136,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">URL วิดีโอ</label>
                                 <input type="url" name="video_url" value="{{ old('video_url', $exerciseLibrary->video_url) }}"
-                                       class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                                       class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300"
                                        placeholder="https://www.youtube.com/watch?v=...">
                             </div>
                             <div class="relative flex items-center justify-center">
@@ -146,7 +146,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">อัปโหลดไฟล์วิดีโอใหม่</label>
                                 <input type="file" name="video_file" accept="video/mp4,video/webm"
-                                       class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                                       class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-ncdblue-50 file:text-ncdblue-700 hover:file:bg-ncdblue-100">
                                 <p class="text-xs text-gray-400 mt-1">MP4, WebM (ไม่เกิน 50MB)</p>
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                                 </div>
                             @endif
                             <div @click="$refs.fileInput.click()"
-                                 class="border-2 border-dashed border-gray-200 rounded-xl p-4 text-center cursor-pointer hover:border-blue-400 hover:bg-blue-50/30 transition">
+                                 class="border-2 border-dashed border-gray-200 rounded-xl p-4 text-center cursor-pointer hover:border-nature-400 hover:bg-nature-50/30 transition">
                                 <div>
                                     <i class="fa-solid fa-cloud-arrow-up text-2xl text-gray-300 mb-1"></i>
                                     <p class="text-xs text-gray-500">อัปโหลดภาพปกใหม่</p>
@@ -205,7 +205,7 @@
                                 <label class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-gray-50 cursor-pointer transition">
                                     <input type="checkbox" name="suitable_for[]" value="{{ $key }}"
                                            {{ in_array($key, old('suitable_for', $exerciseLibrary->suitable_for ?? [])) ? 'checked' : '' }}
-                                           class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                           class="w-4 h-4 text-nature-600 border-gray-300 rounded focus:ring-nature-300">
                                     <span class="text-sm text-gray-700">{{ $label }}</span>
                                 </label>
                             @endforeach
@@ -220,7 +220,7 @@
                                     <i class="fa-solid fa-tags text-teal-500 mr-1"></i>แท็ก
                                 </label>
                                 <input type="text" name="tags" value="{{ old('tags', $exerciseLibrary->tags ? implode(',', $exerciseLibrary->tags) : '') }}"
-                                       class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                                       class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300"
                                        placeholder="คั่นด้วยคอมม่า">
                             </div>
                             <div class="flex items-center justify-between">
@@ -229,13 +229,13 @@
                                     <input type="checkbox" name="is_active" value="1"
                                            {{ old('is_active', $exerciseLibrary->is_active) ? 'checked' : '' }}
                                            class="sr-only peer">
-                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-nature-100 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-nature-600"></div>
                                 </label>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">ลำดับการแสดงผล</label>
                                 <input type="number" name="sort_order" value="{{ old('sort_order', $exerciseLibrary->sort_order) }}"
-                                       min="0" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500">
+                                       min="0" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300">
                             </div>
                         </div>
                     </div>

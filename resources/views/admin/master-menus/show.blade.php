@@ -7,7 +7,7 @@
             </a>
             <div class="flex-1">
                 <h2 class="text-2xl font-bold text-gray-800">
-                    <i class="fa-solid fa-eye mr-2 text-blue-600"></i>{{ $masterMenu->name }}
+                    <i class="fa-solid fa-eye mr-2 text-nature-600"></i>{{ $masterMenu->name }}
                 </h2>
                 <p class="text-sm text-gray-500 mt-1">รายละเอียดเมนูอาหารในคลังวัสดุ</p>
             </div>
@@ -30,8 +30,8 @@
                              alt="{{ $masterMenu->name }}"
                              class="w-full h-64 object-cover">
                     @else
-                        <div class="w-full h-64 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
-                            <i class="fa-solid fa-utensils text-6xl text-blue-200"></i>
+                        <div class="w-full h-64 bg-gradient-to-br from-nature-50 to-nature-100 flex items-center justify-center">
+                            <i class="fa-solid fa-utensils text-6xl text-nature-200"></i>
                         </div>
                     @endif
                     <div class="p-6">
@@ -43,7 +43,7 @@
                             </span>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-nature-50 text-nature-700">
                                 <i class="fa-solid fa-folder mr-1"></i>{{ $categories[$masterMenu->category] ?? $masterMenu->category }}
                             </span>
                             @if($masterMenu->difficulty_level)
@@ -75,8 +75,8 @@
                             <i class="fa-solid fa-chart-pie text-green-500 mr-2"></i>ข้อมูลโภชนาการ
                         </h3>
                         <div class="grid grid-cols-3 sm:grid-cols-6 gap-4">
-                            <div class="text-center p-3 bg-blue-50 rounded-xl">
-                                <p class="text-2xl font-bold text-blue-600">{{ number_format($masterMenu->calories, 0) }}</p>
+                            <div class="text-center p-3 bg-nature-50 rounded-xl">
+                                <p class="text-2xl font-bold text-nature-600">{{ number_format($masterMenu->calories, 0) }}</p>
                                 <p class="text-xs text-gray-500">แคลอรี่</p>
                                 <p class="text-xs text-gray-400">kcal</p>
                             </div>
@@ -122,7 +122,7 @@
                     @if($masterMenu->instructions)
                         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                             <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                                <i class="fa-solid fa-list-ol text-blue-500 mr-2"></i>วิธีทำ
+                                <i class="fa-solid fa-list-ol text-nature-500 mr-2"></i>วิธีทำ
                             </h3>
                             <div class="text-sm text-gray-600 whitespace-pre-line">{{ $masterMenu->instructions }}</div>
                         </div>

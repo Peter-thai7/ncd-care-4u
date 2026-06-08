@@ -3,12 +3,12 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h2 class="text-2xl font-bold text-gray-800">
-                    <i class="fa-solid fa-dumbbell mr-2 text-blue-600"></i>คลังท่าบริหาร
+                    <i class="fa-solid fa-dumbbell mr-2 text-nature-600"></i>คลังท่าบริหาร
                 </h2>
                 <p class="text-sm text-gray-500 mt-1">จัดการท่าบริหารสำหรับสั่งจ่ายให้คนไข้ (Library System)</p>
             </div>
             <a href="{{ route('admin.exercise-libraries.create') }}"
-               class="inline-flex items-center px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-sm text-sm font-medium">
+               class="inline-flex items-center px-4 py-2.5 bg-nature-600 text-white rounded-lg hover:bg-nature-700 transition shadow-sm text-sm font-medium">
                 <i class="fa-solid fa-plus mr-2"></i>เพิ่มท่าบริหารใหม่
             </a>
         </div>
@@ -22,32 +22,32 @@
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                     <input type="text" name="search" value="{{ request('search') }}"
                            placeholder="ค้นหาชื่อท่าบริหาร, รายละเอียด..."
-                           class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                           class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300 focus:border-nature-500">
                 </div>
-                <select name="category" class="px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 bg-white min-w-[160px]">
+                <select name="category" class="px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300 bg-white min-w-[160px]">
                     <option value="">ทุกหมวดหมู่</option>
                     @foreach($categories as $key => $label)
                         <option value="{{ $key }}" {{ request('category') === $key ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
                 </select>
-                <select name="difficulty_level" class="px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 bg-white min-w-[140px]">
+                <select name="difficulty_level" class="px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300 bg-white min-w-[140px]">
                     <option value="">ทุกระดับ</option>
                     @foreach($difficulties as $key => $label)
                         <option value="{{ $key }}" {{ request('difficulty_level') === $key ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
                 </select>
-                <select name="suitable_for" class="px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 bg-white min-w-[160px]">
+                <select name="suitable_for" class="px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300 bg-white min-w-[160px]">
                     <option value="">ทุกโรค</option>
                     @foreach($conditions as $key => $label)
                         <option value="{{ $key }}" {{ request('suitable_for') === $key ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
                 </select>
-                <select name="is_active" class="px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 bg-white min-w-[130px]">
+                <select name="is_active" class="px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-nature-300 bg-white min-w-[130px]">
                     <option value="">ทุกสถานะ</option>
                     <option value="1" {{ request('is_active') === '1' ? 'selected' : '' }}>เปิดใช้งาน</option>
                     <option value="0" {{ request('is_active') === '0' ? 'selected' : '' }}>ปิดใช้งาน</option>
                 </select>
-                <button type="submit" class="px-4 py-2.5 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition">
+                <button type="submit" class="px-4 py-2.5 bg-nature-600 text-white rounded-lg text-sm hover:bg-nature-700 transition">
                     <i class="fa-solid fa-filter mr-1"></i>ค้นหา
                 </button>
                 <a href="{{ route('admin.exercise-libraries.index') }}" class="px-4 py-2.5 bg-gray-100 text-gray-600 rounded-lg text-sm hover:bg-gray-200 transition text-center">
@@ -60,8 +60,8 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
-                        <i class="fa-solid fa-dumbbell text-blue-600"></i>
+                    <div class="w-10 h-10 bg-nature-50 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-dumbbell text-nature-600"></i>
                     </div>
                     <div>
                         <p class="text-xs text-gray-500">ท่าบริหารทั้งหมด</p>
@@ -133,7 +133,7 @@
                         </thead>
                         <tbody>
                             @foreach($exercises as $index => $exercise)
-                                <tr class="border-b border-gray-50 hover:bg-blue-50/30 transition">
+                                <tr class="border-b border-gray-50 hover:bg-nature-50/30 transition">
                                     <td class="px-4 py-3 text-gray-500">{{ $exercises->firstItem() + $index }}</td>
                                     <td class="px-4 py-3">
                                         @if($exercise->thumbnail_path)
@@ -141,8 +141,8 @@
                                                  alt="{{ $exercise->name }}"
                                                  class="w-12 h-12 rounded-lg object-cover border border-gray-200">
                                         @else
-                                            <div class="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center">
-                                                <i class="fa-solid fa-dumbbell text-blue-300"></i>
+                                            <div class="w-12 h-12 rounded-lg bg-nature-50 flex items-center justify-center">
+                                                <i class="fa-solid fa-dumbbell text-nature-300"></i>
                                             </div>
                                         @endif
                                     </td>
@@ -151,7 +151,7 @@
                                         <div class="text-xs text-gray-400 mt-0.5">{{ Str::limit($exercise->description, 50) }}</div>
                                     </td>
                                     <td class="px-4 py-3">
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-nature-50 text-nature-700">
                                             {{ $categories[$exercise->category] ?? $exercise->category }}
                                         </span>
                                     </td>
@@ -197,14 +197,14 @@
                                     <td class="px-4 py-3 text-center">
                                         <button type="button"
                                                 @click="toggleActive('{{ route('admin.exercise-libraries.toggle-active', $exercise) }}', this)"
-                                                class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 {{ $exercise->is_active ? 'bg-blue-600' : 'bg-gray-300' }}">
+                                                class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-nature-300 focus:ring-offset-2 {{ $exercise->is_active ? 'bg-nature-600' : 'bg-gray-300' }}">
                                             <span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm {{ $exercise->is_active ? 'translate-x-6' : 'translate-x-1' }}"></span>
                                         </button>
                                     </td>
                                     <td class="px-4 py-3">
                                         <div class="flex items-center justify-center gap-1">
                                             <a href="{{ route('admin.exercise-libraries.show', $exercise) }}"
-                                               class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition" title="ดู">
+                                               class="p-2 text-gray-400 hover:text-nature-600 hover:bg-nature-50 rounded-lg transition" title="ดู">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
                                             <a href="{{ route('admin.exercise-libraries.edit', $exercise) }}"
@@ -242,7 +242,7 @@
                     <h3 class="text-lg font-medium text-gray-500 mb-1">ยังไม่มีท่าบริหารในคลัง</h3>
                     <p class="text-sm text-gray-400 mb-4">เริ่มต้นเพิ่มท่าบริหารเพื่อให้นักกายภาพฯ สามารถสั่งจ่ายให้คนไข้ได้</p>
                     <a href="{{ route('admin.exercise-libraries.create') }}"
-                       class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm">
+                       class="inline-flex items-center px-4 py-2 bg-nature-600 text-white rounded-lg hover:bg-nature-700 transition text-sm">
                         <i class="fa-solid fa-plus mr-2"></i>เพิ่มท่าบริหารแรก
                     </a>
                 </div>
@@ -266,11 +266,11 @@
                     const dot = btn.querySelector('span');
                     if (data.is_active) {
                         btn.classList.remove('bg-gray-300');
-                        btn.classList.add('bg-blue-600');
+                        btn.classList.add('bg-nature-600');
                         dot.classList.remove('translate-x-1');
                         dot.classList.add('translate-x-6');
                     } else {
-                        btn.classList.remove('bg-blue-600');
+                        btn.classList.remove('bg-nature-600');
                         btn.classList.add('bg-gray-300');
                         dot.classList.remove('translate-x-6');
                         dot.classList.add('translate-x-1');
