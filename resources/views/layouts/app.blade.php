@@ -88,14 +88,14 @@
                     @php
                         $user = auth()->user();
                         $roleColors = [
-                            'system_admin'  => 'bg-nature-100 ring-nature-200 text-nature-600',
-                            'sub_admin'     => 'bg-ncdblue-100 ring-ncdblue-200 text-ncdblue-600',
+                            'system-admin'  => 'bg-nature-100 ring-nature-200 text-nature-600',
+                            'sub-admin'     => 'bg-ncdblue-100 ring-ncdblue-200 text-ncdblue-600',
                             'doctor'        => 'bg-sky-100 ring-sky-200 text-sky-600',
                             'nurse'         => 'bg-purple-100 ring-purple-200 text-purple-600',
-                            'pharmacist'    => 'bg-amber-100 ring-amber-200 text-amber-600',
+                            'laboratory'    => 'bg-amber-100 ring-amber-200 text-amber-600',
                             'nutritionist'  => 'bg-green-100 ring-green-200 text-green-600',
-                            'physio'        => 'bg-orange-100 ring-orange-200 text-orange-600',
-                            'researcher'    => 'bg-pink-100 ring-pink-200 text-pink-600',
+                            'physiotherapist' => 'bg-orange-100 ring-orange-200 text-orange-600',
+                            'observer'      => 'bg-pink-100 ring-pink-200 text-pink-600',
                             'patient'       => 'bg-rose-100 ring-rose-200 text-rose-600',
                         ];
                         $userRole = $user->roles->first()?->name ?? 'patient';
