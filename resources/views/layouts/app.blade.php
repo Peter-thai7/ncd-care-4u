@@ -108,8 +108,15 @@
                 </div>
             </header>
 
+            <!-- Page Header -->
+            @isset($header)
+                <div class="px-5 lg:px-8 pt-5 lg:pt-6">
+                    {{ $header }}
+                </div>
+            @endisset
+
             <!-- Page Content -->
-            <div class="p-5 lg:p-8">
+            <div class="p-5 lg:p-8 {{ isset($header) ? 'pt-0 lg:pt-0' : '' }}">
                 {{ $slot }}
             </div>
         </main>
@@ -136,5 +143,8 @@
             if (el) el.textContent = 'วัน' + dayName + 'ที่ ' + date + ' ' + monthName + ' ' + year;
         });
     </script>
+
+    <!-- Page-specific Scripts -->
+    @stack('scripts')
 </body>
 </html>
