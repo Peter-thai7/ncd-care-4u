@@ -8,7 +8,7 @@ use App\Http\Requests\Admin\UpdateExerciseLibraryRequest;
 use App\Models\ExerciseLibrary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\Facades\Image;
 
 class ExerciseLibraryController extends Controller
 {
@@ -220,15 +220,18 @@ class ExerciseLibraryController extends Controller
         $relativePath = $subPath . '/' . date('Y/m');
 
         // บีบอัดรูปภาพ
-        $image = Image::read($file->getRealPath());
-        $image->scaleDown(width: 1200);
+        $image = Image::make($file->getRealPath());
+        $image->resize(1200, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
 
         $fullPath = storage_path('app/public/' . $relativePath);
         if (!is_dir($fullPath)) {
             mkdir($fullPath, 0755, true);
         }
 
-        $image->save($fullPath . '/' . $hashName, quality: 80);
+        $image->save($fullPath . '/' . $hashName, 80);
 
         return $relativePath . '/' . $hashName;
     }
