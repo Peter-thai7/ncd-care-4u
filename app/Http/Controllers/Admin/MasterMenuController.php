@@ -8,7 +8,7 @@ use App\Http\Requests\Admin\UpdateMasterMenuRequest;
 use App\Models\MasterMenu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\Facades\Image;
 
 class MasterMenuController extends Controller
 {
@@ -197,8 +197,11 @@ class MasterMenuController extends Controller
         $relativePath = 'uploads/menus/' . date('Y/m');
 
         // บีบอัดรูปภาพด้วย Intervention Image
-        $image = Image::read($file->getRealPath());
-        $image->scaleDown(width: 1200);
+        $image = Image::make($file->getRealPath());
+        $image->resize(1200, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
 
         // เก็บล่าสุด
         $fullPath = storage_path('app/public/' . $relativePath);
@@ -206,7 +209,7 @@ class MasterMenuController extends Controller
             mkdir($fullPath, 0755, true);
         }
 
-        $image->save($fullPath . '/' . $hashName, quality: 80);
+        $image->save($fullPath . '/' . $hashName, 80);
 
         return $relativePath . '/' . $hashName;
     }
