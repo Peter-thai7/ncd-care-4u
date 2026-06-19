@@ -15,6 +15,9 @@
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
 
+    <!-- Fix FOUC: hide [x-cloak] elements before Alpine initializes -->
+    <style>[x-cloak]{display:none!important;}</style>
+
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
@@ -22,7 +25,7 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body class="bg-slate-50 font-anuphan text-slate-800" x-data="{ loading: true, sidebarOpen: window.innerWidth >= 1024 }" x-init="setTimeout(() => { loading = false }, 800)">
+<body class="bg-slate-50 font-anuphan text-slate-800" x-data="{ loading: true, sidebarOpen: window.innerWidth >= 1024 }" x-init="$nextTick(()=>{if(window.hasCharts){let s=setTimeout(()=>{loading=false;},1000);window.addEventListener('charts-ready',()=>{clearTimeout(s);loading=false;},{once:true});}else{loading=false;}});">
 
     <!-- ============ SKELETON LOADING ============ -->
     <div x-show="loading" x-transition class="min-h-screen flex">
