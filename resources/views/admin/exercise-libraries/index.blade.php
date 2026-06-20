@@ -3,13 +3,13 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
                 <h2 class="text-2xl font-bold text-gray-800">
-                    <i class="fa-solid fa-dumbbell mr-2 text-blue-600"></i>คลังท่าบริหาร
+                    <i class="fa-solid fa-dumbbell mr-2 text-blue-600"></i>คลังท่ากายบริหาร
                 </h2>
-                <p class="text-sm text-gray-500 mt-1">จัดการท่าบริหารสำหรับสั่งจ่ายให้คนไข้ (Library System)</p>
+                <p class="text-sm text-gray-500 mt-1">จัดการท่ากายบริหารสำหรับสั่งจ่ายให้คนไข้ (Library System)</p>
             </div>
             <a href="{{ route('admin.exercise-libraries.create') }}"
                class="inline-flex items-center px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-sm text-sm font-medium">
-                <i class="fa-solid fa-plus mr-2"></i>เพิ่มท่าบริหารใหม่
+                <i class="fa-solid fa-plus mr-2"></i>เพิ่มท่ากายบริหารใหม่
             </a>
         </div>
     </x-slot>
@@ -21,7 +21,7 @@
                 <div class="flex-1 relative">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                     <input type="text" name="search" value="{{ request('search') }}"
-                           placeholder="ค้นหาชื่อท่าบริหาร, รายละเอียด..."
+                           placeholder="ค้นหาชื่อท่ากายบริหาร, รายละเอียด..."
                            class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <select name="category" class="px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 bg-white min-w-[160px]">
@@ -64,7 +64,7 @@
                         <i class="fa-solid fa-dumbbell text-blue-600"></i>
                     </div>
                     <div>
-                        <p class="text-xs text-gray-500">ท่าบริหารทั้งหมด</p>
+                        <p class="text-xs text-gray-500">ท่ากายบริหารทั้งหมด</p>
                         <p class="text-xl font-bold text-gray-800">{{ \App\Models\ExerciseLibrary::count() }}</p>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                             <tr class="bg-gray-50 border-b border-gray-100">
                                 <th class="text-left px-4 py-3 font-semibold text-gray-600 w-16">#</th>
                                 <th class="text-left px-4 py-3 font-semibold text-gray-600">ภาพปก</th>
-                                <th class="text-left px-4 py-3 font-semibold text-gray-600">ชื่อท่าบริหาร</th>
+                                <th class="text-left px-4 py-3 font-semibold text-gray-600">ชื่อท่ากายบริหาร</th>
                                 <th class="text-left px-4 py-3 font-semibold text-gray-600">หมวดหมู่</th>
                                 <th class="text-left px-4 py-3 font-semibold text-gray-600">ระยะเวลา</th>
                                 <th class="text-left px-4 py-3 font-semibold text-gray-600">ระดับ</th>
@@ -239,11 +239,11 @@
                     <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fa-solid fa-dumbbell text-3xl text-gray-300"></i>
                     </div>
-                    <h3 class="text-lg font-medium text-gray-500 mb-1">ยังไม่มีท่าบริหารในคลัง</h3>
-                    <p class="text-sm text-gray-400 mb-4">เริ่มต้นเพิ่มท่าบริหารเพื่อให้นักกายภาพฯ สามารถสั่งจ่ายให้คนไข้ได้</p>
+                    <h3 class="text-lg font-medium text-gray-500 mb-1">ยังไม่มีท่ากายบริหารในคลัง</h3>
+                    <p class="text-sm text-gray-400 mb-4">เริ่มต้นเพิ่มท่ากายบริหารเพื่อให้นักกายภาพฯ สามารถสั่งจ่ายให้คนไข้ได้</p>
                     <a href="{{ route('admin.exercise-libraries.create') }}"
                        class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm">
-                        <i class="fa-solid fa-plus mr-2"></i>เพิ่มท่าบริหารแรก
+                        <i class="fa-solid fa-plus mr-2"></i>เพิ่มท่ากายบริหารแรก
                     </a>
                 </div>
             @endif

@@ -27,3 +27,8 @@ Homestead.yaml
 Thumbs.db
 theme-v4.zip 
 theme-v4/ 
+
+# Temporary files
+*.bak.*
+diff-review.txt
+*.zip

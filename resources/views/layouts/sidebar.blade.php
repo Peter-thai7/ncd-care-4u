@@ -108,11 +108,11 @@
                     <span x-show="sidebarOpen" x-transition class="whitespace-nowrap">จัดการเมนูอาหาร</span>
                 </a>
             </li>
-            <!-- คลังท่าออกกำลังกาย -->
+            <!-- คลังท่ากายบริหาร -->
             <li>
                 <a href="{{ route('admin.exercise-libraries.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-nature-50/50 hover:text-nature-700 transition-colors">
                     <i class="fa-solid fa-dumbbell text-lg w-6 text-center"></i>
-                    <span x-show="sidebarOpen" x-transition class="whitespace-nowrap">คลังท่าออกกำลังกาย</span>
+                    <span x-show="sidebarOpen" x-transition class="whitespace-nowrap">คลังท่ากายบริหาร</span>
                 </a>
             </li>
             <!-- จัดการผู้ใช้ -->

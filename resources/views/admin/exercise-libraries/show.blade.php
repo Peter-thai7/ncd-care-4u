@@ -9,7 +9,7 @@
                 <h2 class="text-2xl font-bold text-gray-800">
                     <i class="fa-solid fa-eye mr-2 text-nature-600"></i>{{ $exerciseLibrary->name }}
                 </h2>
-                <p class="text-sm text-gray-500 mt-1">รายละเอียดท่าบริหารในคลังวัสดุ</p>
+                <p class="text-sm text-gray-500 mt-1">รายละเอียดท่ากายบริหารในคลังวัสดุ</p>
             </div>
             <a href="{{ route('admin.exercise-libraries.edit', $exerciseLibrary) }}"
                class="inline-flex items-center px-4 py-2.5 bg-nature-600 text-white rounded-lg hover:bg-nature-700 transition shadow-sm text-sm font-medium">
@@ -18,17 +18,76 @@
         </div>
     </x-slot>
 
+    @php
+    function detectVideoType(string $url): string
+    {
+        $url = trim($url);
+        if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)/i', $url)) return 'youtube';
+        if (preg_match('/youtube\.com\/shorts\//i', $url)) return 'youtube_shorts';
+        if (preg_match('/facebook\.com\/.*\/videos\//i', $url)) return 'facebook';
+        if (preg_match('/\.mp4(\?|$)/i', $url)) return 'mp4_url';
+        return 'other';
+    }
+
+    function getEmbedUrl(string $url): string
+    {
+        $url = trim($url);
+        $type = detectVideoType($url);
+        if ($type === 'youtube' || $type === 'youtube_shorts') {
+            $videoId = null;
+            if (preg_match('/youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/i', $url, $m)) $videoId = $m[1];
+            elseif (preg_match('/youtu\.be\/([a-zA-Z0-9_-]{11})/i', $url, $m)) $videoId = $m[1];
+            elseif (preg_match('/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/i', $url, $m)) $videoId = $m[1];
+            elseif (preg_match('/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/i', $url, $m)) $videoId = $m[1];
+            if ($videoId) return 'https://www.youtube.com/embed/' . $videoId . '?rel=0';
+        }
+        if ($type === 'facebook') {
+            return 'https://www.facebook.com/plugins/video.php?href=' . urlencode($url) . '&show_text=false';
+        }
+        return $url;
+    }
+
+    $allVideos = [];
+    if ($exerciseLibrary->video_url) {
+        $type = detectVideoType($exerciseLibrary->video_url);
+        $allVideos[] = ['type' => $type, 'source' => 'url', 'url' => $exerciseLibrary->video_url, 'embed_url' => getEmbedUrl($exerciseLibrary->video_url)];
+    }
+    if ($exerciseLibrary->video_path) {
+        $allVideos[] = ['type' => 'upload', 'source' => 'upload', 'path' => $exerciseLibrary->video_path, 'url' => Storage::url($exerciseLibrary->video_path)];
+    }
+    @endphp
+
     <div class="py-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- ====== Left Column ====== -->
             <div class="lg:col-span-2 space-y-6">
 
-                <!-- Hero Thumbnail + Name -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    @if($exerciseLibrary->video_url)
-                        <div class="aspect-video bg-gray-900">
-                            <iframe src="{{ $exerciseLibrary->video_url }}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
-                        </div>
+                    @if(count($allVideos) > 0)
+                        @php $heroVideo = $allVideos[0]; @endphp
+                        @if($heroVideo['type'] === 'youtube' || $heroVideo['type'] === 'youtube_shorts')
+                            <div class="aspect-video bg-gray-900">
+                                <iframe src="{{ $heroVideo['embed_url'] }}"
+                                        class="w-full h-full" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                            </div>
+                        @elseif($heroVideo['type'] === 'facebook')
+                            <div class="aspect-video bg-gray-900">
+                                <iframe src="{{ $heroVideo['embed_url'] }}"
+                                        class="w-full h-full" frameborder="0"
+                                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </div>
+                        @elseif($heroVideo['type'] === 'mp4_url' || $heroVideo['type'] === 'upload')
+                            <div class="aspect-video bg-gray-900">
+                                <video controls class="w-full h-full" preload="metadata">
+                                    <source src="{{ $heroVideo['url'] }}" type="video/mp4">
+                                </video>
+                            </div>
+                        @else
+                            <div class="aspect-video bg-gray-900">
+                                <iframe src="{{ $heroVideo['url'] }}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        @endif
                     @elseif($exerciseLibrary->thumbnail_path)
                         <img src="{{ Storage::url($exerciseLibrary->thumbnail_path) }}"
                              alt="{{ $exerciseLibrary->name }}"
@@ -38,6 +97,7 @@
                             <i class="fa-solid fa-dumbbell text-6xl text-nature-200"></i>
                         </div>
                     @endif
+
                     <div class="p-6">
                         <div class="flex items-center gap-3 mb-3">
                             <h3 class="text-2xl font-bold text-gray-800">{{ $exerciseLibrary->name }}</h3>
@@ -69,6 +129,11 @@
                                     <i class="fa-solid fa-fire mr-1"></i>{{ number_format($exerciseLibrary->calories_burned, 0) }} kcal
                                 </span>
                             @endif
+                            @if(count($allVideos) > 0)
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700">
+                                    <i class="fa-solid fa-video mr-1"></i>{{ count($allVideos) }} คลิป
+                                </span>
+                            @endif
                         </div>
                         @if($exerciseLibrary->description)
                             <p class="text-gray-600 whitespace-pre-line">{{ $exerciseLibrary->description }}</p>
@@ -76,12 +141,53 @@
                     </div>
                 </div>
 
-                <!-- Instructions & Precautions -->
+                @if(count($allVideos) > 1)
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fa-solid fa-film text-nature-500 mr-2"></i>วิดีโอเพิ่มเติม
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            @foreach($allVideos as $index => $video)
+                                @if($index > 0)
+                                <div class="rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
+                                    @if($video['type'] === 'youtube' || $video['type'] === 'youtube_shorts')
+                                        <div class="aspect-video">
+                                            <iframe src="{{ $video['embed_url'] }}"
+                                                    class="w-full h-full" frameborder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    @elseif($video['type'] === 'facebook')
+                                        <div class="aspect-video">
+                                            <iframe src="{{ $video['embed_url'] }}"
+                                                    class="w-full h-full" frameborder="0"
+                                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                    @elseif($video['type'] === 'mp4_url' || $video['type'] === 'upload')
+                                        <div class="aspect-video">
+                                            <video controls class="w-full h-full" preload="metadata">
+                                                <source src="{{ $video['url'] }}" type="video/mp4">
+                                            </video>
+                                        </div>
+                                    @else
+                                        <div class="aspect-video flex items-center justify-center bg-gray-100">
+                                            <a href="{{ $video['url'] }}" target="_blank" class="text-blue-600 hover:underline text-sm">
+                                                <i class="fa-solid fa-external-link mr-1"></i>เปิดลิงก์วิดีโอ
+                                            </a>
+                                        </div>
+                                    @endif
+                                </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
                 <div class="grid grid-cols-1 gap-6">
                     @if($exerciseLibrary->instructions)
                         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                             <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                                <i class="fa-solid fa-list-ol text-nature-500 mr-2"></i>วิธีทำท่าบริหาร
+                                <i class="fa-solid fa-list-ol text-nature-500 mr-2"></i>วิธีทำท่ากายบริหาร
                             </h3>
                             <div class="text-sm text-gray-600 whitespace-pre-line">{{ $exerciseLibrary->instructions }}</div>
                         </div>
@@ -95,24 +201,9 @@
                         </div>
                     @endif
                 </div>
-
-                <!-- Local Video -->
-                @if($exerciseLibrary->video_path && !$exerciseLibrary->video_url)
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
-                            <i class="fa-solid fa-file-video text-indigo-500 mr-2"></i>ไฟล์วิดีโอ
-                        </h3>
-                        <video controls class="w-full rounded-lg">
-                            <source src="{{ Storage::url($exerciseLibrary->video_path) }}" type="video/mp4">
-                        </video>
-                    </div>
-                @endif
             </div>
 
-            <!-- ====== Right Column ====== -->
             <div class="space-y-6">
-
-                <!-- Suitable Conditions -->
                 @if($exerciseLibrary->suitable_for && count($exerciseLibrary->suitable_for) > 0)
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
@@ -129,7 +220,6 @@
                     </div>
                 @endif
 
-                <!-- Tags -->
                 @if($exerciseLibrary->tags && count($exerciseLibrary->tags) > 0)
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
@@ -145,7 +235,6 @@
                     </div>
                 @endif
 
-                <!-- Audit Info -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                     <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
                         <i class="fa-solid fa-clock-rotate-left text-gray-500 mr-2"></i>ข้อมูลระบบ
